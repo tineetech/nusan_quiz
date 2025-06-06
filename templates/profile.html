@@ -4,11 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil Pengguna - Nusan Quiz</title>
+    <style>
+        body {
+            padding: 0;
+        }
+        main {
+            margin: 0;
+            background: url("{{ bg_1 }}") center center;
+            background-size: cover;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            flex-direction: column;
+        }
+    </style>
 </head>
 <body>
-    <h1>Profil Pengguna</h1>
-    <p>Halo, Pengguna!</p> {# Menampilkan nilai dari variabel dinamis #}
-    <p>Ini adalah halaman profil Anda.</p>
-    <p><a href="/">Kembali ke Home</a></p>
+    <main>
+        <h1>Profil Pengguna</h1>
+        <p id="welcome-text">Halo, Pengguna!</p> {# Menampilkan nilai dari variabel dinamis #}
+        <p id="bintang">Ini adalah halaman profil Anda.</p>
+        <p><a href="/">Kembali ke Home</a></p>
+    </main>
+
+    <script>
+        const username = localStorage.getItem('username')
+        const umur = localStorage.getItem('umur')
+        const rank = localStorage.getItem('rank')
+        const bintang = localStorage.getItem('bintang')
+
+        if (!username && !umur && !rank && !bintang) {
+            localStorage.setItem('username', 'budiman')
+            localStorage.setItem('umur', '12')
+            localStorage.setItem('rank', '1')
+            localStorage.setItem('bintang', '0')
+            location.reload()
+        }
+
+        document.getElementById('welcome-text').innerText = `Halo, ${username}! posisi rank kamu ada di ke ${rank}`
+        document.getElementById('bintang').innerText = `Total bintang mu : ${bintang}`
+    </script>
 </body>
 </html>

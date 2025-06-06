@@ -4,14 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }} - Nusan Quiz</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column; /* Mengatur layout vertikal */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: black;
+            color: white; /* Warna teks untuk tombol */
+            font-family: sans-serif;
+        }
+
+        #splashContainer {
+            text-align: center;
+        }
+
+        #startGameButton {
+            padding: 15px 30px;
+            font-size: 1.5em;
+            background-color: white; /* Warna hijau */
+            color: black;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px; /* Jarak antara tombol dan video */
+        }
+
+        #introVideo {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            display: none; /* Awalnya sembunyikan video */
+            position: absolute; /* Posisikan video di belakang konten */
+            top: 0;
+            left: 0;
+            z-index: -1; /* Pastikan di bawah elemen lain */
+        }
+
+        h1 {
+            z-index: 1; /* Pastikan judul di atas video */
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 <body>
-    <h1>{{ message }}</h1>
-    <p>Ini adalah halaman utama dari Nusan Quiz sederhana.</p>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/riwayat">Riwayat</a></li>
-        <li><a href="/profile">Profil Pemain</a></li>
-    </ul>
+    <div id="splashContainer">
+        <h1>Nusan Quiz</h1>
+        <button id="startGameButton">Start Game</button>
+    </div>
+
+    <video id="introVideo" playsinline>
+        <source src="{{ video_url }}" type="video/mp4">
+        Maaf, browser Anda tidak mendukung tag video.
+    </video>
+
+    <script>
+        const video = document.getElementById('introVideo');
+        const startGameButton = document.getElementById('startGameButton');
+        const splashContainer = document.getElementById('splashContainer');
+
+        startGameButton.addEventListener('click', () => {
+            // Sembunyikan kontainer tombol/teks
+            splashContainer.style.display = 'none';
+
+            // Tampilkan video
+            video.style.display = 'block';
+
+            // Putar video
+            video.play().then(() => {
+                // Video berhasil diputar
+                console.log('Video playing...');
+            }).catch(error => {
+                // Terjadi kesalahan saat memutar video (misal: autoplay diblokir)
+                console.error('Autoplay prevented or error occurred:', error);
+                // Fallback: Arahkan langsung ke game jika video tidak bisa diputar
+                window.location.href = "{{ url_for('startGame') }}";
+            });
+        });
+
+        // Event listener saat video selesai diputar
+        video.onended = function() {
+            window.location.href = "{{ url_for('startGame') }}"; // Arahkan ke route 'startGame'
+        };
+    </script>
 </body>
 </html>
