@@ -11,12 +11,11 @@ def home():
 
 @app.route('/start-game')
 def startGame():
-    return render_template('start-game.html')
+    return render_template('games/index.html')
 
 @app.route('/riwayat')
 def about():
     return render_template('riwayat.html')
-
 
 @app.route('/profile')
 def show_user_profile():
