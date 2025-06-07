@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, send_from_directory
 
 app = Flask(__name__)
 
@@ -12,6 +12,12 @@ def home():
 @app.route('/start-game')
 def startGame():
     return render_template('games/index.html')
+
+# route new for access renspy assets in static/games folder
+@app.route('/<path:filename>')
+def serve_renpy_game_assets_puclic(filename):
+    return send_from_directory('static/games/', filename)
+
 
 @app.route('/riwayat')
 def about():
