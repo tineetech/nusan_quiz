@@ -11,13 +11,7 @@ def home():
 
 @app.route('/start-game')
 def startGame():
-    return render_template('games/index.html')
-
-# route new for access renspy assets in static/games folder
-@app.route('/<path:filename>')
-def serve_renpy_game_assets_puclic(filename):
-    return send_from_directory('static/games/', filename)
-
+    return render_template('ch1.html')
 
 @app.route('/riwayat')
 def about():
@@ -27,6 +21,17 @@ def about():
 def show_user_profile():
     bg_1 = url_for('static', filename='images/bg-1.jpeg')
     return render_template('profile.html', bg_1=bg_1)
+
+# Serve the game HTML file (e.g. index.html)
+@app.route('/<game>/')
+def serve_game_index(game):
+    return send_from_directory(f'static/{game}', 'index.html')
+
+# Serve all other files: JS, images, Ren'Py assets
+@app.route('/<game>/<path:filename>')
+def serve_game_assets(game, filename):
+    return send_from_directory(f'static/{game}', filename)
+
 
 if __name__ == '__main__':
     app.run(debug=True) # debug=True akan otomatis me-reload server saat ada perubahan kode
