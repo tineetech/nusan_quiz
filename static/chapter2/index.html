@@ -66,17 +66,17 @@
 
     #statusDiv, #inputDiv {
       background: rgba(0, 0, 0, 0.75);
-      width: 50%;
+      /* width: 50%;
       margin: auto;
       min-width: 340px;
-      padding: 10px;
+      padding: 10px; */
 
-      position: absolute;
+      /* position: absolute;
       top: 0;
       left: 0;
-      right: 0;
+      right: 0; */
 
-      border-radius: 0 0 5px 5px;
+      /* border-radius: 0 0 5px 5px; */
     }
 
     #statusTextDiv {
@@ -203,9 +203,11 @@
     </div>
   </div>
 
-  <div id="statusDiv" class="hidden">
-    <div id="statusTextDiv"></div>
-    <progress id="statusProgress" value="0" max="100"></progress>
+  <div id="statusDiv" class="visible" style="position: fixed;top: 0;left: 0;width: 100%;height: 100vh;display: flex;justify-content: center !important;align-items: center !important;">
+    <div style="background-color: white; width: 250px; height: auto; border-radius: 10px;padding: 50px 20px;">
+      <div id="statusTextDiv"></div>
+      <progress id="statusProgress" value="0" max="100"></progress>
+    </div>
   </div>
 
   <div id="inputDiv" class="hidden">

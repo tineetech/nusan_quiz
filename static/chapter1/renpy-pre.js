@@ -107,6 +107,16 @@ Module.preRun = Module.preRun || [ ];
 
         cancelStatusTimeout();
         lastProgressTime = 0;
+        let parsedData;
+
+         try {
+            parsedData = JSON.parse(s.replace(/'([^']+)'/g, '"$1"'));
+            console.log("Parsed JSON:", parsedData);
+        } catch (e) {
+            parsedData = null;
+            console.log("Not a valid JSON string, or parsing failed:", s);
+            // console.error("Parsing error:", e);
+        }
 
         if (statusText) {
             statusText += "<br>";
@@ -134,7 +144,17 @@ Module.preRun = Module.preRun || [ ];
         s = s.replace('\n', '<br />', 'g');
 
         statusText += s;
-        statusTextDiv.innerHTML = statusText;
+        
+        if (parsedData !== null) {
+            statusTextDiv.innerHTML = `
+            Jawaban yang dijawab benar : ${parsedData.benar_jawaban}, 
+            <br>
+            Soal Terjawab : ${parsedData.terjawab}
+            `;
+        } else {
+            statusTextDiv.innerHTML = statusText;
+        }
+        // statusTextDiv.innerHTML = statusText;
 
         showStatus();
     }
