@@ -151,6 +151,9 @@ Module.preRun = Module.preRun || [ ];
             <br>
             Soal Terjawab : ${parsedData.terjawab}
             `;
+            setTimeout(() => {
+                window.location.href = '/'
+            }, 2500);
         } else {
             statusTextDiv.innerHTML = statusText;
         }
