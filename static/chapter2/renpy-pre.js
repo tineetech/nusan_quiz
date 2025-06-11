@@ -117,7 +117,7 @@ Module.preRun = Module.preRun || [ ];
             console.log("Not a valid JSON string, or parsing failed:", s);
             // console.error("Parsing error:", e);
         }
-        
+
         if (statusText) {
             statusText += "<br>";
         }
@@ -168,6 +168,7 @@ Module.preRun = Module.preRun || [ ];
             console.log(s);
             return;
         }
+
         printCommon(s);
         startStatusTimeout();
     }
