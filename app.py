@@ -34,4 +34,4 @@ def serve_game_assets(game, filename):
 
 
 if __name__ == '__main__':
-    app.run(debug=True) # debug=True akan otomatis me-reload server saat ada perubahan kode
+    app.run(debug=True)
