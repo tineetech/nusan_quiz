@@ -146,7 +146,6 @@ Module.preRun = Module.preRun || [ ];
         statusText += s;
         
         if (parsedData !== null) {
-            
             statusTextDiv.innerHTML = `
             Jawaban yang dijawab benar : ${parsedData.benar_jawaban}, 
             <br>
